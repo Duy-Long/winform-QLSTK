@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="STKModelStoreContainer" CdmEntityContainer="STKEntities">
+    <EntitySetMapping Name="KhachHangs">
+      <EntityTypeMapping TypeName="STKModel.KhachHang">
+        <MappingFragment StoreEntitySet="KhachHang">
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="HoTen" ColumnName="HoTen" />
+          <ScalarProperty Name="CMND" ColumnName="CMND" />
+          <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
+          <ScalarProperty Name="NoiCap" ColumnName="NoiCap" />
+          <ScalarProperty Name="DiaChi" ColumnName="DiaChi" />
+          <ScalarProperty Name="DienThoai" ColumnName="DienThoai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SoTietKiems">
+      <EntityTypeMapping TypeName="STKModel.SoTietKiem">
+        <MappingFragment StoreEntitySet="SoTietKiem">
+          <ScalarProperty Name="MaSoTK" ColumnName="MaSoTK" />
+          <ScalarProperty Name="MaKH" ColumnName="MaKH" />
+          <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+          <ScalarProperty Name="LoaiKyHan" ColumnName="LoaiKyHan" />
+          <ScalarProperty Name="LaiSuat" ColumnName="LaiSuat" />
+          <ScalarProperty Name="Sodu" ColumnName="Sodu" />
+          <ScalarProperty Name="NgayMS" ColumnName="NgayMS" />
+          <ScalarProperty Name="NgayHH" ColumnName="NgayHH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
