@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtSodu = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.dtpHH = new System.Windows.Forms.DateTimePicker();
             this.dtpMoso = new System.Windows.Forms.DateTimePicker();
@@ -46,24 +47,32 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btTim = new System.Windows.Forms.Button();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.cBMa = new System.Windows.Forms.CheckBox();
+            this.cBKH = new System.Windows.Forms.CheckBox();
+            this.txtTim = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.btXoa = new System.Windows.Forms.Button();
             this.btSua = new System.Windows.Forms.Button();
             this.btThoat = new System.Windows.Forms.Button();
-            this.textBox7 = new System.Windows.Forms.TextBox();
             this.btRut = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgv = new System.Windows.Forms.DataGridView();
+            this.MaSoTK = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LoaiKyHan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LaiSuat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Sodu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayMS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayHH = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox7);
+            this.groupBox1.Controls.Add(this.txtSodu);
             this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.dtpHH);
             this.groupBox1.Controls.Add(this.dtpMoso);
@@ -87,6 +96,14 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin sổ tiết kiệm";
+            // 
+            // txtSodu
+            // 
+            this.txtSodu.Location = new System.Drawing.Point(120, 159);
+            this.txtSodu.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSodu.Name = "txtSodu";
+            this.txtSodu.Size = new System.Drawing.Size(253, 22);
+            this.txtSodu.TabIndex = 20;
             // 
             // label11
             // 
@@ -218,10 +235,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.btTim);
-            this.groupBox2.Controls.Add(this.checkBox2);
-            this.groupBox2.Controls.Add(this.checkBox1);
-            this.groupBox2.Controls.Add(this.textBox6);
+            this.groupBox2.Controls.Add(this.cBMa);
+            this.groupBox2.Controls.Add(this.cBKH);
+            this.groupBox2.Controls.Add(this.txtTim);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Location = new System.Drawing.Point(865, 43);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -234,43 +252,44 @@
             // 
             // btTim
             // 
-            this.btTim.Location = new System.Drawing.Point(111, 193);
+            this.btTim.Location = new System.Drawing.Point(142, 193);
             this.btTim.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btTim.Name = "btTim";
-            this.btTim.Size = new System.Drawing.Size(110, 36);
+            this.btTim.Size = new System.Drawing.Size(79, 36);
             this.btTim.TabIndex = 4;
             this.btTim.Text = "Tìm kiếm";
             this.btTim.UseVisualStyleBackColor = true;
+            this.btTim.Click += new System.EventHandler(this.btTim_Click);
             // 
-            // checkBox2
+            // cBMa
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(10, 144);
-            this.checkBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(151, 21);
-            this.checkBox2.TabIndex = 3;
-            this.checkBox2.Text = "Tìm mã sổ tiết kiệm";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.cBMa.AutoSize = true;
+            this.cBMa.Location = new System.Drawing.Point(10, 144);
+            this.cBMa.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cBMa.Name = "cBMa";
+            this.cBMa.Size = new System.Drawing.Size(151, 21);
+            this.cBMa.TabIndex = 3;
+            this.cBMa.Text = "Tìm mã sổ tiết kiệm";
+            this.cBMa.UseVisualStyleBackColor = true;
             // 
-            // checkBox1
+            // cBKH
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(10, 107);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(155, 21);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Tìm tên khách hàng";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cBKH.AutoSize = true;
+            this.cBKH.Location = new System.Drawing.Point(10, 107);
+            this.cBKH.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cBKH.Name = "cBKH";
+            this.cBKH.Size = new System.Drawing.Size(155, 21);
+            this.cBKH.TabIndex = 2;
+            this.cBKH.Text = "Tìm tên khách hàng";
+            this.cBKH.UseVisualStyleBackColor = true;
             // 
-            // textBox6
+            // txtTim
             // 
-            this.textBox6.Location = new System.Drawing.Point(10, 67);
-            this.textBox6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(183, 22);
-            this.textBox6.TabIndex = 1;
+            this.txtTim.Location = new System.Drawing.Point(10, 67);
+            this.txtTim.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtTim.Name = "txtTim";
+            this.txtTim.Size = new System.Drawing.Size(183, 22);
+            this.txtTim.TabIndex = 1;
             // 
             // label6
             // 
@@ -290,6 +309,7 @@
             this.btXoa.TabIndex = 3;
             this.btXoa.Text = "Xóa";
             this.btXoa.UseVisualStyleBackColor = true;
+            this.btXoa.Click += new System.EventHandler(this.btXoa_Click);
             // 
             // btSua
             // 
@@ -300,6 +320,7 @@
             this.btSua.TabIndex = 4;
             this.btSua.Text = "Sửa";
             this.btSua.UseVisualStyleBackColor = true;
+            this.btSua.Click += new System.EventHandler(this.btSua_Click);
             // 
             // btThoat
             // 
@@ -312,14 +333,6 @@
             this.btThoat.UseVisualStyleBackColor = true;
             this.btThoat.Click += new System.EventHandler(this.btThoat_Click);
             // 
-            // textBox7
-            // 
-            this.textBox7.Location = new System.Drawing.Point(120, 159);
-            this.textBox7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(253, 22);
-            this.textBox7.TabIndex = 20;
-            // 
             // btRut
             // 
             this.btRut.Location = new System.Drawing.Point(410, 302);
@@ -331,21 +344,105 @@
             this.btRut.UseVisualStyleBackColor = true;
             this.btRut.Click += new System.EventHandler(this.btRut_Click);
             // 
-            // dataGridView1
+            // dgv
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(30, 378);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1077, 412);
-            this.dataGridView1.TabIndex = 7;
+            this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MaSoTK,
+            this.MaKH,
+            this.TenKH,
+            this.LoaiKyHan,
+            this.LaiSuat,
+            this.Sodu,
+            this.NgayMS,
+            this.NgayHH});
+            this.dgv.Location = new System.Drawing.Point(30, 378);
+            this.dgv.Name = "dgv";
+            this.dgv.RowTemplate.Height = 24;
+            this.dgv.Size = new System.Drawing.Size(1077, 412);
+            this.dgv.TabIndex = 7;
+            this.dgv.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellContentClick_1);
+            // 
+            // MaSoTK
+            // 
+            this.MaSoTK.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.MaSoTK.DataPropertyName = "MaSoTK";
+            this.MaSoTK.HeaderText = "Mã sổ";
+            this.MaSoTK.Name = "MaSoTK";
+            this.MaSoTK.Width = 56;
+            // 
+            // MaKH
+            // 
+            this.MaKH.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.MaKH.DataPropertyName = "MaKH";
+            this.MaKH.HeaderText = "Mã Khách hàng";
+            this.MaKH.Name = "MaKH";
+            this.MaKH.Width = 96;
+            // 
+            // TenKH
+            // 
+            this.TenKH.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.TenKH.DataPropertyName = "TenKH";
+            this.TenKH.HeaderText = "Tên Khách Hàng";
+            this.TenKH.Name = "TenKH";
+            this.TenKH.Width = 101;
+            // 
+            // LoaiKyHan
+            // 
+            this.LoaiKyHan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.LoaiKyHan.DataPropertyName = "LoaiKyHan";
+            this.LoaiKyHan.HeaderText = "Loại Kỳ Hạn";
+            this.LoaiKyHan.Name = "LoaiKyHan";
+            this.LoaiKyHan.Width = 64;
+            // 
+            // LaiSuat
+            // 
+            this.LaiSuat.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.LaiSuat.DataPropertyName = "LaiSuat";
+            this.LaiSuat.HeaderText = "Lãi suất ( % )";
+            this.LaiSuat.Name = "LaiSuat";
+            this.LaiSuat.Width = 72;
+            // 
+            // Sodu
+            // 
+            this.Sodu.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.Sodu.DataPropertyName = "Sodu";
+            this.Sodu.HeaderText = "Số dư";
+            this.Sodu.Name = "Sodu";
+            this.Sodu.Width = 55;
+            // 
+            // NgayMS
+            // 
+            this.NgayMS.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.NgayMS.DataPropertyName = "NgayMS";
+            this.NgayMS.HeaderText = "Ngày Mở Sổ";
+            this.NgayMS.Name = "NgayMS";
+            this.NgayMS.Width = 72;
+            // 
+            // NgayHH
+            // 
+            this.NgayHH.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NgayHH.DataPropertyName = "NgayHH";
+            this.NgayHH.HeaderText = "Ngày Hết Hạn";
+            this.NgayHH.Name = "NgayHH";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(10, 193);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(80, 36);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Refresh";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // DanhSachSoTK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1196, 876);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgv);
             this.Controls.Add(this.btRut);
             this.Controls.Add(this.btThoat);
             this.Controls.Add(this.groupBox2);
@@ -355,11 +452,12 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "DanhSachSoTK";
             this.Text = "Danh sách sổ tiết kiệm";
+            this.Load += new System.EventHandler(this.DanhSachSoTK_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -383,16 +481,25 @@
         private System.Windows.Forms.TextBox txtLoai;
         private System.Windows.Forms.TextBox txtMaso;
         private System.Windows.Forms.Button btTim;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.CheckBox cBMa;
+        private System.Windows.Forms.CheckBox cBKH;
+        private System.Windows.Forms.TextBox txtTim;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btXoa;
         private System.Windows.Forms.Button btSua;
         private System.Windows.Forms.Button btThoat;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox txtSodu;
         private System.Windows.Forms.Button btRut;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaSoTK;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaKH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenKH;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LoaiKyHan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LaiSuat;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Sodu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NgayMS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NgayHH;
+        private System.Windows.Forms.Button button1;
     }
 }

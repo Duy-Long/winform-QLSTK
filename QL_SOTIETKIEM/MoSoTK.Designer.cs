@@ -133,6 +133,7 @@
             this.btThem.TabIndex = 9;
             this.btThem.Text = "Thêm sổ";
             this.btThem.UseVisualStyleBackColor = true;
+            this.btThem.Click += new System.EventHandler(this.btThem_Click);
             // 
             // txtMaso
             // 
@@ -257,6 +258,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MoSoTK";
             this.Text = "Mở sổ tiết kiệm";
+            this.Load += new System.EventHandler(this.MoSoTK_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

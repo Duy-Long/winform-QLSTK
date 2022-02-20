@@ -7,64 +7,107 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using QL_SOTIETKIEM.DAL;
+using System.Data.SqlClient;
 
 namespace QL_SOTIETKIEM
 {
     public partial class KhachHang : Form
     {
-        private STKEntities data = new STKEntities();
+        SqlConnection connection;
+        SqlCommand command;
+        string str = @"Data Source = DESKTOP-IQ17TA1\SQLEXPRESS ; Initial Catalog =STK1; Integrated Security=True"; //duong dan toi sv cua csdl
+        SqlDataAdapter adapter = new SqlDataAdapter();
+        DataTable table1 = new DataTable(); //thongtin ve Khach hang
 
         public KhachHang()
         {
             InitializeComponent();
-            LoadThongTinKH();
-            ChangeGridViewHeaderName();
         }
 
-        private void ChangeGridViewHeaderName()
+        void LoadKhachHang()
         {
-            dgv1.Columns[0].HeaderText = "Mã Khách Hàng";
-            dgv1.Columns[1].HeaderText = "Tên Khách Hàng";
-            dgv1.Columns[2].HeaderText = "Số CMND";
-            dgv1.Columns[3].HeaderText = "Ngày Cấp";
-            dgv1.Columns[4].HeaderText = "Nơi Cấp";
-            dgv1.Columns[5].HeaderText = "Địa Chỉ";
-            dgv1.Columns[6].HeaderText = "Điện Thoại";
+            command = connection.CreateCommand();
+            command.CommandText = "select * from KhachHang";
+            adapter.SelectCommand = command;
+            table1.Clear();
+            adapter.Fill(table1);
+            dgvKH.DataSource = table1;  
+
         }
 
-        private void AddLopHocBinding()
+        private void dgvKH_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            //Refresh lại
-            txtMaKH.DataBindings.Clear();
-            txtTenKH.DataBindings.Clear();
-            txtCMND.DataBindings.Clear();
-            dtpNgayCap.DataBindings.Clear();
-            txtNoiCap.DataBindings.Clear();
-            txtDiachi.DataBindings.Clear();
-            txtsoDT.DataBindings.Clear();
-            
-            //Add lại binding
-            txtMaKH.DataBindings.Add("Text", dgv1.DataSource, "MaKH");
-            txtTenKH.DataBindings.Add("Text", dgv1.DataSource, "HoTen");
-            txtCMND.DataBindings.Add("Text", dgv1.DataSource, "CMND");
-            dtpNgayCap.DataBindings.Add("Text", dgv1.DataSource, "NgayCap");
-            txtNoiCap.DataBindings.Add("Text", dgv1.DataSource, "NoiCap");
-            txtDiachi.DataBindings.Add("Text", dgv1.DataSource, "DiaChi");
-            txtsoDT.DataBindings.Add("Text", dgv1.DataSource, "DienThoai");
-            
+            int x;
+            x = dgvKH.CurrentRow.Index;
+            txtMaKH.Text = dgvKH.Rows[x].Cells[0].Value.ToString();
+            txtTenKH.Text = dgvKH.Rows[x].Cells[1].Value.ToString();
+            txtCMND.Text = dgvKH.Rows[x].Cells[2].Value.ToString();
+            dtpNgayCap.Text = dgvKH.Rows[x].Cells[3].Value.ToString();
+            txtNoiCap.Text = dgvKH.Rows[x].Cells[4].Value.ToString();
+            txtDiachi.Text = dgvKH.Rows[x].Cells[5].Value.ToString();
+            txtsoDT.Text = dgvKH.Rows[x].Cells[6].Value.ToString();
         }
-        private void LoadThongTinKH()
+
+        private void KhachHang_Load_1(object sender, EventArgs e)
         {
-            var ds = from KH in data.KhachHangs
-                           select new { Makh = KH.MaKH, Hoten = KH.HoTen, cmnd = KH.CMND, Ngaycap = KH.NgayCap, Noicap = KH.NoiCap,
-                                               Diachi = KH.DiaChi, Dienthoai = KH.DienThoai };
-            dgv1.DataSource = ds.ToList();
-            //Add binding
-            AddLopHocBinding();
+            connection = new SqlConnection(str);
+            connection.Open();
+            LoadKhachHang();
         }
 
+        private void btThem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                command = connection.CreateCommand();
+                command.CommandText = "Insert into KhachHang values ('" + txtMaKH.Text + "','" + txtTenKH.Text + "','" + txtCMND.Text + "','" + dtpNgayCap.Value.ToString() + "','" + txtNoiCap.Text + "','" + txtDiachi.Text + "','" + txtsoDT.Text + "')";
+                command.ExecuteNonQuery();
+                LoadKhachHang();
+                MessageBox.Show("Đã thêm thành công!", "Thông báo");
+            }
+            catch
+            {
+                MessageBox.Show("Vui lòng kiểm tra lại mã số hàng hóa !", "Cảnh Báo!");
+            }
+           
+           
+        }
+        
+        private void btXoa_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                command = connection.CreateCommand();
+                command.CommandText = "delete from KhachHang where MaKH='" + txtMaKH.Text + "'";
+                command.ExecuteNonQuery();
+                LoadKhachHang();
+                MessageBox.Show("Đã xóa thành công!", "Thông báo");
+            }
+            catch
+            {
+                MessageBox.Show("Vui lòng kiểm tra lại !", "Cảnh Báo!");
+            }
+        }
 
+        private void btSua_Click(object sender, EventArgs e)
+        {
+            command = connection.CreateCommand();
+            command.CommandText = "update KhachHang set MaKH='" + txtMaKH.Text + "',TenKH='" + txtTenKH.Text + "',CMND='" + txtCMND.Text + "',NgayCap='" + dtpNgayCap.Value.ToString() + "',NoiCap='" + txtNoiCap.Text + "',DiaChi='" + txtDiachi.Text + "',DienThoai='" + txtsoDT.Text + "'Where MaKH='" + txtMaKH.Text + "'";
+            command.ExecuteNonQuery();
+            LoadKhachHang();
+            MessageBox.Show("Đã sửa thành công!", "Thông báo");
+        }
+
+        private void txtTim_TextChanged(object sender, EventArgs e)
+        {
+            command = connection.CreateCommand();
+            command.CommandText = "select * from KhachHang where TenKH like '%" + txtTim.Text + "%'";
+            command.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            SqlDataAdapter da = new SqlDataAdapter(command);
+            da.Fill(dt);
+            dgvKH.DataSource = dt;
+        }
 
         private void btThoat_Click(object sender, EventArgs e)
         {
@@ -77,40 +120,6 @@ namespace QL_SOTIETKIEM
             }
         }
 
-        private void btThem_Click(object sender, EventArgs e)
-        {
-            
-            string MaKH = txtMaKH.Text;
-            string TenKH = txtTenKH.Text;
-            string CMND = txtCMND.Text;
-            string NgayCap = dtpNgayCap.Text;
-            string NoiCap = txtNoiCap.Text;
-            string DiaChi = txtDiachi.Text;
-            string DienThoai = txtsoDT.Text;
-
-            //Da xuat hien trong CSDL
-            KhachHang kh = data.KhachHangs.Where(k => k.MaKH == MaKH).SingleOrDefault();
-            if (MaKH != null)
-            {
-                MessageBox.Show("Mã lớp học đã tồn tại");
-                return;
-            }
-            else if (String.IsNullOrEmpty(MaKH) || String.IsNullOrEmpty(TenKH))
-            {
-                MessageBox.Show("Mã lớp hoặc Tên lớp không được để trống");
-                return;
-            }
-            else
-            {
-                lop = new LOPHOC();
-                lop.MALOP = MaLop;
-                lop.TENLOP = TenLop;
-                data.LOPHOCs.Add(lop);
-                data.SaveChanges();
-                LoadThongTinLop();
-                MessageBox.Show("Thêm mới lớp học thành công");
-            }
         
-        }
     }
 }
